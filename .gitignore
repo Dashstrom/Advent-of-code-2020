@@ -1,4 +1,4 @@
 *.c
 *.pyd
-*.exp
+*.html
 **/build/
