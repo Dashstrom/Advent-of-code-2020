@@ -1,4 +1,4 @@
 *.c
 *.pyd
-src\day??\build
-
+**/build
+.gitignore
