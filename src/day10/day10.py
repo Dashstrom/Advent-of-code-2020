@@ -3,29 +3,29 @@ from aocd import get_data
 
 
 def parse(raw: str) -> List[int]:
-    """Parse numbers, exemple: `36 \\n 10` -> `[0, 10, 36, 39]`."""
-    adaptaters = sorted([int(number) for number in raw.strip().splitlines()])
-    return [0, *adaptaters, adaptaters[-1] + 3]
+    """Parse numbers, example: `36 \\n 10` -> `[0, 10, 36, 39]`."""
+    adapters = sorted([int(number) for number in raw.strip().splitlines()])
+    return [0, *adapters, adapters[-1] + 3]
 
 
-def part_one(adaptaters: List[int]) -> int:
+def part_one(adapters: List[int]) -> int:
     """Product of 1V connections and 3V connections among adapters."""
     counters = {1: 0, 3: 0}
-    for previous, adaptater in zip(adaptaters[:-1], adaptaters[1:]):
-        counters[adaptater - previous] += 1
+    for previous, adapter in zip(adapters[:-1], adapters[1:]):
+        counters[adapter - previous] += 1
     return counters[1] * counters[3]
 
 
-def part_two(adaptaters: List[int]) -> int:
-    """Numbers of possibilities of adaptaters connections."""
-    possibilities, chaine = 1, 0
-    for i, adaptater in enumerate(adaptaters[:-1]):
-        if adaptaters[i + 1] - adaptater == 1:
-            chaine += 1
-        elif chaine:
-            if chaine > 1:
-                possibilities *= 2 + sum(range(2, chaine))
-            chaine = 0
+def part_two(adapters: List[int]) -> int:
+    """Numbers of possibilities of adapters connections."""
+    possibilities, chain = 1, 0
+    for i, adapter in enumerate(adapters[:-1]):
+        if adapters[i + 1] - adapter == 1:
+            chain += 1
+        elif chain:
+            if chain > 1:
+                possibilities *= 2 + sum(range(2, chain))
+            chain = 0
     return possibilities
 
 

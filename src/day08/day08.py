@@ -8,7 +8,7 @@ Instructions = List[Instruction]
 
 def parse(raw: str) -> Instructions:
     """
-    Parse instructions, exemple: `nop +38 \\n acc -9 \\n jmp +452`
+    Parse instructions, example: `nop +38 \\n acc -9 \\n jmp +452`
     -> `[('nop', 38), ('acc', -9), ('jmp', 452)]`.
     """
     return [(t, int(v))
@@ -17,7 +17,7 @@ def parse(raw: str) -> Instructions:
 
 def execute(instructions: Instructions) -> Tuple[int, bool]:
     """
-    Excecute instructions and return accumulator value
+    Execute instructions and return accumulator value
     and True if the program is a loop.
     """
     already_exe = [False for _ in instructions]
@@ -43,7 +43,7 @@ def swap(instruction: Instruction) -> Instruction:
 
 def part_two(instructions: Instructions) -> Optional[int]:
     """
-    Accumulator value after repair by swaping the instruction
+    Accumulator value after repair by swapping the instruction
     for remove loop and execute inscriptions.
     """
     is_loop, i, acc = True, -1, None

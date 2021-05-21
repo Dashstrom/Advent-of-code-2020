@@ -23,7 +23,7 @@ FIELDS_RE = {
 def parse(raw: str) -> Passports:
     """
     Parse passports,
-    exemple `hcl:#ae17e1 iyr:2013` -> `[('hcl', '#ae17e1'), ('iyr', '2013')]`.
+    example `hcl:#ae17e1 iyr:2013` -> `[('hcl', '#ae17e1'), ('iyr', '2013')]`.
     """
     passports = []
     for raw_passport in raw.strip().split("\n\n"):
@@ -39,8 +39,8 @@ def part_one(passports: Passports) -> int:
     """Sum of passports who have required field."""
     valid = 0
     for passport in passports:
-        passport_feilds = {field[0] for field in passport}
-        if all(field in passport_feilds for field in REQUIRED):
+        passport_fields = {field[0] for field in passport}
+        if all(field in passport_fields for field in REQUIRED):
             valid += 1
     return valid
 
@@ -49,8 +49,8 @@ def part_two(passports: Passports) -> int:
     """Sum of passports who have required field and valid value."""
     valid = 0
     for passport in passports:
-        passport_feilds = {field[0] for field in passport}
-        if all(field in passport_feilds for field in REQUIRED):
+        passport_fields = {field[0] for field in passport}
+        if all(field in passport_fields for field in REQUIRED):
             for (field, value) in passport:
                 try:
                     if not FIELDS_RE[field].fullmatch(value):

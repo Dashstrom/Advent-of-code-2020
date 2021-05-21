@@ -4,8 +4,8 @@ from aocd import get_data
 
 class RecursiveList(list):
     def __contains__(self, item):
-        for range in self:
-            if item in range:
+        for range_ in self:
+            if item in range_:
                 return True
         return False
 
@@ -18,23 +18,23 @@ class Tickets(TypedDict):
 
 def parse(raw: str) -> Tickets:
     """
-    Parse field, ticket and nearby tickets, exemple: `
+    Parse field, ticket and nearby tickets, example: `
     wagon: 3-6 or 8-9 \\n
     zone: 4-47 or 49-96 \\n\\n
     your ticket: \\n 4,9 \\n\\n
     nearby tickets: \\n 10,3`
     -> `{'ticket': [4, 9], 'nearby': [[10, 3]],
-    'fields': {'wagon': RecusiveList([range(3, 9), range(8, 9)]),
-    'zone': RecusiveList([range(4, 47), range(49, 96)])}}`.
+    'fields': {'wagon': RecursiveList([range(3, 9), range(8, 9)]),
+    'zone': RecursiveList([range(4, 47), range(49, 96)])}}`.
     """
     data: Data = {}  # type: ignore
-    raw_flieds, raw_ticket, raw_nearby = raw.strip().split("\n\n")
+    raw_fields, raw_ticket, raw_nearby = raw.strip().split("\n\n")
     ticket = raw_ticket.split("\n")[1].split(",")
     data["ticket"] = [int(value) for value in ticket]
     data["nearby"] = [[int(value) for value in nearby.split(",")]
                       for nearby in raw_nearby.split("\n")[1:]]
     data["fields"] = {}
-    for raw_field in raw_flieds.split("\n"):
+    for raw_field in raw_fields.split("\n"):
         name, raw_ranges = raw_field.split(": ")
         ranges = []
         for raw_range in raw_ranges.split(" or "):

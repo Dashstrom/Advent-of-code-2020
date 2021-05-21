@@ -1,13 +1,12 @@
 from typing import List, Tuple
 from aocd import get_data
 
-
 Question = Tuple[str, int]
 Questions = List[Question]
 
 
 def parse(raw: str) -> Questions:
-    """Parse survey, exemple: `f \\n nv \\n ki` -> `[('fvki', 3)]`."""
+    """Parse survey, example: `f \\n nv \\n ki` -> `[('fvki', 3)]`."""
     return [(survey.replace("\n", ""), survey.count("\n") + 1)
             for survey in raw.strip().split("\n\n")]
 

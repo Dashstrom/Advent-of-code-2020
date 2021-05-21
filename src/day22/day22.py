@@ -5,7 +5,7 @@ Decks = List[List[int]]
 
 
 def parse(raw: str) -> Decks:
-    """Parse decks, exemple: `Player 1: \\n 41` -> `[[41]]`."""
+    """Parse decks, example: `Player 1: \\n 41` -> `[[41]]`."""
     return [[int(card) for card in deck.split('\n')[1:]]
             for deck in raw.strip().split('\n\n')]
 
@@ -23,14 +23,14 @@ def part_one(decks: Decks) -> int:
 
 
 def part_two(decks: Decks) -> int:
-    """Play recusive game with small crab and return the winner score."""
+    """Play recursive game with small crab and return the winner score."""
     final_decks, win_1 = recursive_combat([deck[:] for deck in decks[:]])
     winner_deck = reversed(final_decks[0] if win_1 else final_decks[1])
     return sum(card * i for i, card in enumerate(winner_deck, start=1))
 
 
 def recursive_combat(decks: Decks) -> Tuple[Decks, bool]:
-    """Recusive batle, if there is a tie then start a new fight."""
+    """Recursive battle, if there is a tie then start a new fight."""
     memorised = set()
     p1, p2 = decks[0], decks[1]
     while p1 and p2:

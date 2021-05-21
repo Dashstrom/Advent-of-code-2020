@@ -11,7 +11,7 @@ LINE_RE = re.compile(r"([0-9]*)-([0-9]*) (.): (.*)")
 
 
 def parse(raw: str) -> Passwords:
-    """Parse passwords, exemple: `1-3 b: cdefg` -> `(1, 3, 'b', 'cdefg')`."""
+    """Parse passwords, example: `1-3 b: cdefg` -> `(1, 3, 'b', 'cdefg')`."""
     parsed = []
     for line in raw.strip().split("\n"):
         if match := LINE_RE.fullmatch(line):

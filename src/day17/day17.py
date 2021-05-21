@@ -3,15 +3,16 @@ from aocd import get_data
 
 
 def parse(raw: str) -> Set[Tuple[int, int]]:
-    """Parse cubes possitions, exemple: `#.#` -> `[(0, 0), (2, 0)]`."""
+    """Parse cubes positions, example: `#.#` -> `[(0, 0), (2, 0)]`."""
     return {(x, y) for y, line in enumerate(raw.strip().split("\n"))
             for x, c in enumerate(line) if c == "#"}
 
 
 def run(cubes: Set[Tuple[int, int]], dim: int = 3, cycle: int = 6) -> int:
     """Number of cube after `cycle` repetition in `dim` dimension."""
-    # expend cube dimention
+    # expend cube dimension
     previous_cubes = {cube + (0,) * (dim - 2) for cube in cubes}
+    actual_cubes: Set[Tuple[int, ...]] = previous_cubes
     for cycle in range(cycle):
         actual_cubes: Set[Tuple[int, ...]] = set()
         counter_new: Dict[Tuple[int, ...], int] = {}

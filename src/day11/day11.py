@@ -15,12 +15,12 @@ class Seats(TypedDict):
 
 
 def part_one(seats: Seats) -> int:
-    """Sum of seats after excuted with rules of parte one."""
+    """Sum of seats after executed with rules of parte one."""
     return _solver.part_one(seats)  # type: ignore
 
 
 def part_two(seats: Seats) -> int:
-    """Sum of seats after excuted with rules of parte two."""
+    """Sum of seats after executed with rules of parte two."""
     return _solver.part_two(seats)  # type: ignore
 
 

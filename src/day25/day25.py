@@ -3,9 +3,9 @@ from aocd import get_data
 
 
 def parse(raw: str) -> Tuple[int, int]:
-    """Parse keys, exemple: `171 \\n 366` -> `(171, 366)`."""
+    """Parse keys, example: `171 \\n 366` -> `(171, 366)`."""
     public_key_door, public_key_card = raw.strip().split("\n")
-    return (int(public_key_door), int(public_key_card))
+    return int(public_key_door), int(public_key_card)
 
 
 def part_one(public_keys: Tuple[int, int]) -> int:

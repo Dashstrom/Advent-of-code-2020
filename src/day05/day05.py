@@ -10,7 +10,7 @@ def parse(raw: str) -> List[int]:
 
 
 def part_one(seats: List[int]) -> int:
-    """Hightest seat id."""
+    """Highest seat id."""
     return seats[-1]
 
 

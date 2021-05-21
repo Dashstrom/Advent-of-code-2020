@@ -8,7 +8,7 @@ Foods = List[Food]
 
 def parse(raw: str) -> Foods:
     """
-    Parse foods, exemple: `rzhb gsfqhcd (contains fish, shellfish)`
+    Parse foods, example: `rzhb gsfqhcd (contains fish, shellfish)`
     -> `[(['rzhb', 'gsfqhcd'], ['fish', 'shellfish'])]`.
     """
     foods = []
@@ -30,7 +30,7 @@ def part_one(foods: Foods) -> int:
 
 
 def foods_ingredients(foods: Foods) -> Set[str]:
-    """Set of ingreditents."""
+    """Set of ingredients."""
     return set(ingredient
                for ingredients, _ in foods
                for ingredient in ingredients)
@@ -38,7 +38,7 @@ def foods_ingredients(foods: Foods) -> Set[str]:
 
 def allergens_possibilities(foods: Foods) -> Dict[str, Set[str]]:
     """
-    Dict of allergent with the ingredients that may contain them as a key.
+    Dict of allergen with the ingredients that may contain them as a key.
     """
     possibilities: Dict[str, Set[str]] = {}
     for ingredients, allergens in foods:
@@ -66,9 +66,9 @@ def part_two(foods: Foods) -> str:
         allergen, ingredient = min(possibilities.items(),
                                    key=lambda ai: len(ai[1] - matched))
         available_ingredients = ingredient - matched
-        ingredian = available_ingredients.pop()
-        matched.add(ingredian)
-        matchs.append((ingredian, allergen))
+        ingredients = available_ingredients.pop()
+        matched.add(ingredients)
+        matchs.append((ingredients, allergen))
         del possibilities[allergen]
     matchs.sort(key=lambda k: k[1])
     return ",".join(ingredient for ingredient, _ in matchs)

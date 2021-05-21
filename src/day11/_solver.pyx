@@ -1,5 +1,3 @@
-import timeit
-import time
 from copy import deepcopy
 
 DIRECTIONS = ((-1, -1), (-1, 1), (1, -1), (1, 1),
@@ -16,9 +14,8 @@ cpdef parse(str raw):
              for y, line in enumerate(seats)]
     return {"state": seats, "nears": nears}
 
-
 cpdef part_one(seats):
-    cdef int tour=0, x, y, cy, cx, nb_person, occupied_seat
+    cdef int tour = 0, x, y, cy, cx, nb_person, occupied_seat
     old = deepcopy(seats["state"])
     while True:
         actual = []
@@ -32,7 +29,7 @@ cpdef part_one(seats):
                     for cy, cx in seats["nears"][y][x]:
                         if cy != -1 and old[cy][cx] == 1:
                             nb_person += 1
-                    if occupied_seat == 1 and nb_person>=4:
+                    if occupied_seat == 1 and nb_person >= 4:
                         have_change = True
                         actual[y].append(0)
                     elif occupied_seat == 0 and nb_person == 0:
@@ -46,7 +43,6 @@ cpdef part_one(seats):
         if not have_change:
             return sum_occupied_seats(actual)
         old = actual
-
 
 cpdef part_two(seats):
     cdef int x, y, cy, cx, dx, dy, nb_person, occupied_seat, i, tour = 0
@@ -67,7 +63,7 @@ cpdef part_two(seats):
                                 nb_person += 1
                                 break
                             cy, cx = seats["nears"][cy][cx][i]
-                    if occupied_seat == 1 and nb_person>=5:
+                    if occupied_seat == 1 and nb_person >= 5:
                         have_change = True
                         actual[y].append(0)
                     elif occupied_seat == 0 and nb_person == 0:
@@ -81,6 +77,5 @@ cpdef part_two(seats):
             return sum_occupied_seats(actual)
         old = actual
 
-    
 cpdef sum_occupied_seats(seats):
-    return sum([sum([s for s in line if s == 1]) for line in seats]) 
+    return sum([sum([s for s in line if s == 1]) for line in seats])

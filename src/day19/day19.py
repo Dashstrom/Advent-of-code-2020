@@ -30,7 +30,7 @@ def parse(raw: str) -> RulesWithEntries:
 
 
 def run(rules: Dict[str, str], entries: List[str]):
-    """Compute the regrex and count how many entry match it."""
+    """Compute the regex and count how many entry match it."""
     rule_0 = rules["0"]
     match = NUMBERS_RE.search(rule_0)
     while match:
@@ -40,17 +40,17 @@ def run(rules: Dict[str, str], entries: List[str]):
     return sum(1 for line in entries if rule_0_re.fullmatch(line))
 
 
-def part_one(puzzle: RulesWithEntries):
+def part_one(rules_entries: RulesWithEntries):
     """Valid word number with regex."""
-    return run(puzzle["rules"], puzzle["entries"])
+    return run(rules_entries["rules"], rules_entries["entries"])
 
 
-def part_two(puzzle: RulesWithEntries):
+def part_two(rules_entries: RulesWithEntries):
     """Valid word number with a recursive patched regex."""
-    patched_rules = dict(puzzle["rules"])
+    patched_rules = dict(rules_entries["rules"])
     patched_rules.update({"8": " 42+?",
                           "11": "(?P<rec>(?: 42 31)|(?: 42(?&rec) 31))"})
-    return run(patched_rules, puzzle["entries"])
+    return run(patched_rules, rules_entries["entries"])
 
 
 if __name__ == "__main__":

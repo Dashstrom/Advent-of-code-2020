@@ -36,14 +36,14 @@ class Position:
 
 
 def parse(raw: str) -> Instructions:
-    """Parse Instructions, exemple: `F18` -> `[('F', 18)]`."""
+    """Parse Instructions, example: `F18` -> `[('F', 18)]`."""
     return [(action_with_value[0], int(action_with_value[1:]))
             for action_with_value in raw.strip().split("\n")]
 
 
 def part_one(instructions: Instructions) -> int:
     """
-    Return manhattan distance after execute inscrition
+    Return manhattan distance after execute inscription
     with rules of part two.
     """
     boat = Position()
@@ -63,7 +63,7 @@ def part_one(instructions: Instructions) -> int:
 def part_two(instructions: Instructions) -> int:
     """
     Return manhattan distance after execute instructions
-    with hrules of part two.
+    with rules of part two.
     """
     boat = Position()
     waypoint = Position(1, 10)

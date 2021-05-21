@@ -21,7 +21,7 @@ class N2(int):
 
 def parse(raw: str) -> str:
     """
-    Reformat expersions, exemple: `5 + 9 \\n 2 * 7 ` -> `(5 + 9) + (2 * 7)`.
+    Reformat expressions, example: `5 + 9 \\n 2 * 7 ` -> `(5 + 9) + (2 * 7)`.
     """
     return "({})".format(raw.strip().replace("\n", ")+("))
 

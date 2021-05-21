@@ -6,27 +6,27 @@ Forest = List[List[bool]]
 
 
 def parse(raw: str) -> Forest:
-    """Parse forest, exemple: \n `#.` -> `[[True, False]]`."""
+    """Parse forest, example: \n `#.` -> `[[True, False]]`."""
     return [[c != "." for c in line] for line in raw.strip().splitlines()]
 
 
 def part_one(forest: Forest) -> int:
-    """Numbers of trees hited in Toboggan Trajectory."""
-    lenght = len(forest[0])
+    """Numbers of trees hit in Toboggan Trajectory."""
+    length = len(forest[0])
     return sum(1 for i, line in enumerate(forest)
-               if line[(i * 3) % lenght])
+               if line[(i * 3) % length])
 
 
 def part_two(forest: Forest) -> int:
     """The product of the numbers of trees to hit at each trajectory."""
     answer = 1
-    lenght = len(forest[0])
+    length = len(forest[0])
     for dx, dy in ((1, 1), (3, 1), (5, 1), (7, 1), (1, 2)):
         x, trees = 0, 0
         for y in range(0, len(forest), dy):
             if forest[y][x]:
                 trees += 1
-            x = (x + dx) % lenght
+            x = (x + dx) % length
         answer *= trees
     return answer
 

@@ -4,15 +4,15 @@ from typing import Dict, List, Set, Tuple
 from aocd import get_data
 
 PATH_RE = re.compile("(e|se|sw|w|nw|and|ne)")
-vectorizer = {"ne": (1, 1), "e": (2, 0), "se": (1, -1),
+VECTORIZER = {"ne": (1, 1), "e": (2, 0), "se": (1, -1),
               "sw": (-1, -1), "w": (-2, 0), "nw": (-1, 1)}
 
 Paths = List[List[Tuple[int, int]]]
 
 
 def parse(raw: str) -> Paths:
-    """Parse paths, exemple: `newsw` -> `[[(1, 1), (-2, 0), (-1, -1)]]`."""
-    return [[vectorizer[direction] for direction in PATH_RE.findall(path)]
+    """Parse paths, example: `newsw` -> `[[(1, 1), (-2, 0), (-1, -1)]]`."""
+    return [[VECTORIZER[direction] for direction in PATH_RE.findall(path)]
             for path in raw.strip().split('\n')]
 
 
@@ -44,7 +44,7 @@ def part_two(paths_tiles: Paths) -> int:
         to_delete = set()
         for tile in black_tiles:
             black_near = 0
-            for dx, dy in vectorizer.values():
+            for dx, dy in VECTORIZER.values():
                 near = tile[0] + dx, tile[1] + dy
                 if near in black_tiles:
                     black_near += 1

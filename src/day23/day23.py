@@ -21,7 +21,7 @@ def part_one(cups: List[int]) -> int:
 def play(
     cups: List[int], moves: int, numbers_of_cups: int = None
 ) -> Dict[int, int]:
-    """Play the game of grab tases."""
+    """Play the game of grab cups."""
     circle_cups = {previous: cup for previous, cup in zip(cups[:-1], cups[1:])}
     previous = cups[-1]
     if numbers_of_cups is not None:

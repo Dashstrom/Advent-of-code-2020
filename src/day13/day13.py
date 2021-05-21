@@ -9,19 +9,19 @@ class Schedules(NamedTuple):
 
 def parse(raw: str) -> Schedules:
     """
-    Parse timstamp and numbers, exemple: `1000390 \\n 13,x,41`
+    Parse timestamp and numbers, example: `1000390 \\n 13,x,41`
     -> Schedules(1000390, [13, 0, 41]).
     """
     timestamp, raw_ids = raw.strip().split("\n")
-    ids = [int(id) for id in raw_ids.replace("x", "0").split(',')]
+    ids = [int(id_) for id_ in raw_ids.replace("x", "0").split(',')]
     return Schedules(int(timestamp), ids)
 
 
 def part_one(schedules: Schedules) -> int:
     """Product of the id of the next bus by the time to wait for it."""
-    next_in, id_ = min(((id - schedules.timestamp % id, id)
-                        for id in schedules.ids if id), key=lambda di: di[0])
-    return next_in * id_
+    wait, id_next = min(((id_ - schedules.timestamp % id_, id_)
+                         for id_ in schedules.ids if id_), key=lambda di: di[0])
+    return wait * id_next
 
 
 def part_two(schedules: Schedules) -> int:
@@ -30,13 +30,13 @@ def part_two(schedules: Schedules) -> int:
     at offsets matching their positions in the list.
     """
     match_time: int = 0
-    bus = [(lag, id) for lag, id in enumerate(schedules.ids) if id]
+    bus = [(lag, id_) for lag, id_ in enumerate(schedules.ids) if id_]
     _, step = bus.pop(0)
     while bus:
-        for lag, id in reversed(bus):
-            if (match_time + lag) % id == 0:
-                step *= id
-                bus.remove((lag, id))
+        for lag, id_ in reversed(bus):
+            if (match_time + lag) % id_ == 0:
+                step *= id_
+                bus.remove((lag, id_))
         match_time += step
     return match_time - step
 

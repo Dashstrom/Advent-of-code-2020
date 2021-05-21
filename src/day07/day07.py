@@ -3,17 +3,14 @@ import re
 from typing import Dict, Set
 from aocd import get_data
 
-
 Bags = Dict[str, int]
 Rules = Dict[str, Bags]
-
-
 ITER_LINE_RE = re.compile(r"([0-9+]) ([^,]+) bag")
 
 
 def parse(raw: str) -> Rules:
     """
-    Parse bags rules, exemple: `dotted plum bags contain 3 wavy cyan bags`
+    Parse bags rules, example: `dotted plum bags contain 3 wavy cyan bags`
     ->`{'dotted plum': {'wavy cyan': 3}}`.
     """
     bags: Rules = {}

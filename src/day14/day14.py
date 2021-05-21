@@ -1,7 +1,7 @@
 import re
 
 from itertools import combinations
-from typing import Dict, List, Tuple, Union
+from typing import Dict, List, Tuple, Union, Set
 from aocd import get_data
 
 
@@ -9,13 +9,13 @@ Instruction = Union[str, Tuple[int, int]]
 Instructions = List[Instruction]
 
 
-MEM_RE = re.compile(r"mem\[(\d+)\] = (\d+)")
+MEM_RE = re.compile(r"mem\[(\d+)] = (\d+)")
 MASK_RE = re.compile(r"mask = ([01X]*)")
 
 
 def parse(raw: str) -> Instructions:
     """
-    Parse instructions, exemple: `mask = 01X10001 \\n mem[7] = 33`
+    Parse instructions, example: `mask = 01X10001 \\n mem[7] = 33`
     -> `['01X10001', (7, 33)]`.
     """
     instructions: Instructions = []
@@ -52,6 +52,7 @@ def part_two(instructions: Instructions) -> int:
     """Sum of values in memory after part two."""
     mem: Dict[int, int] = {}
     mask_0, mask_1 = 0, 0
+    masks: Set[int] = set()
     for instruction in instructions:
         if isinstance(instruction, str):
             base_mask = []
@@ -63,11 +64,11 @@ def part_two(instructions: Instructions) -> int:
                     mask_1 += 1 << (35 - pos)
             mask_0 = ~sum(base_mask)
             # generates all possible masks for this instruction
-            masks = {sum(mask) for lenght in range(1 << len(base_mask))
-                     for mask in combinations(base_mask, r=lenght)}
+            masks = {sum(mask) for length in range(1 << len(base_mask))
+                     for mask in combinations(base_mask, r=length)}
         else:
             binary = (instruction[0] | mask_1) & mask_0
-            # put value into all posibilities
+            # put value into all possibilities
             for mask in masks:
                 mem[binary | mask] = instruction[1]
     return sum(mem.values())
