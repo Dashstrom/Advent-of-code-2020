@@ -2,3 +2,4 @@
 *.pyd
 *.html
 **/build/
+.idea/
